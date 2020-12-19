@@ -1,6 +1,14 @@
-from databases import DatabaseContextManager, DATABASE_FILE
+from databases.humansDatabaseTask import DatabaseContextManager, DATABASE_FILE
 from objects.employees import Employee
 
+# Part 2:
+# 1.Insert a new entry into employees table:
+# a.employeeId - 1,b.firstName - John,c.lastName - Johnson,d.dateOfBirth - 1975-01-01,e.phoneNumber - 0-800-800-314,f.email - john@johnson.com,g.salary - 1000.
+# 2.Update dateOfBirth of John Johnson to 1980-01-01.
+# 3.Delete everything from employees table.
+# 4.Add two more entries in employees:
+# a.1, 'John', 'Johnson', '1975-01-01', '0-800-800-888', 'john@johnson.com', 1000b
+#  .2, 'James', 'Jameson', '1985-02-02', '0-800-800-999', 'james@jameson.com', 2000
 
 # Part 2 Task 1
 def create_employee(employee):
@@ -11,7 +19,7 @@ def create_employee(employee):
     with DatabaseContextManager(DATABASE_FILE) as cursor:
         cursor.execute(query, params)
 
-employee1 = Employee('''Hel"lo's''', 'Johnson', '1975-01-01', '0-800-800-314', 'john@johnson.com', 1000)
+employee1 = Employee('John', 'Johnson', '1975-01-01', '0-800-800-314', 'john@johnson.com', 1000)
 employee2 = Employee('James', 'Jameson', '1985-02-02', '0-800-800-999', 'james@jameson.com', 2000)
 employee_list = [employee1,employee2]
 
@@ -25,7 +33,6 @@ def update_date_of_birth(employee, new_date):
         cursor.execute(query, params)
     employee.date_of_birth = new_date
 
-# update_date_of_birth(employee1, '1980-01-01')
 
 # Part 2 Task 3
 def delete_everything_from_employees_table():
@@ -33,15 +40,12 @@ def delete_everything_from_employees_table():
     with DatabaseContextManager(DATABASE_FILE) as cursor:
         cursor.execute(query)
 
-# delete_everything_from_employees_table()
-
 
 # Part 2 Task 4
-for i in employee_list:
-    create_employee(i)
+# for i in employee_list:
+#     create_employee(i)
 
 
-print('''Who's ther"e who lives there''')
 
 
 
